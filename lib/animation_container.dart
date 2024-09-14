@@ -13,6 +13,11 @@ class _AnimationContainerState extends State<AnimationContainer> {
   Color _color = Colors.blue;
   BorderRadiusGeometry _borderRadius = BorderRadius.circular(8);
 
+  double _opacity1 = 1.0; // Initial opacity of the first widget (visible)
+  bool _showFirstChild =
+      true; // Tracks which child to show in AnimatedCrossFade
+
+  // Function to toggle size, color, and shape for the AnimatedContainer
   void _changeContainer() {
     setState(() {
       _width = _width == 100 ? 200 : 100;
@@ -24,35 +29,104 @@ class _AnimationContainerState extends State<AnimationContainer> {
     });
   }
 
+  // Function to toggle the opacity for AnimatedOpacity widget
+  void _toggleOpacity() {
+    setState(() {
+      _opacity1 = _opacity1 == 1.0 ? 0.0 : 1.0;
+    });
+  }
+
+  // Function to toggle between first and second child in AnimatedCrossFade
+  void _toggleCrossFade() {
+    setState(() {
+      _showFirstChild = !_showFirstChild;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Animations'),
+        title: const Text('Animations Demo'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedContainer(
-              height: _height,
-              width: _width,
-              decoration: BoxDecoration(
-                borderRadius: _borderRadius,
-                color: _color,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // AnimatedContainer widget
+              GestureDetector(
+                onTap: _changeContainer,
+                child: AnimatedContainer(
+                  height: _height,
+                  width: _width,
+                  decoration: BoxDecoration(
+                    borderRadius: _borderRadius,
+                    color: _color,
+                  ),
+                  duration: const Duration(seconds: 2),
+                  curve: Curves.easeInOut,
+                ),
               ),
-              duration: const Duration(seconds: 2),
-              curve: Curves.easeInOut,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              onPressed: _changeContainer,
-              child: const Text('Animate Container'),
-            ),
-          ],
+              const SizedBox(height: 30),
+
+              // AnimatedOpacity widget
+              GestureDetector(
+                onTap: _toggleOpacity,
+                child: AnimatedOpacity(
+                  opacity: _opacity1,
+                  duration: const Duration(seconds: 2),
+                  curve: Curves.easeInOut,
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // AnimatedCrossFade widget
+              GestureDetector(
+                onTap: _toggleCrossFade,
+                child: AnimatedCrossFade(
+                  firstChild: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.blue,
+                    child: const Center(
+                      child: Text(
+                        'First Child',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  secondChild: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.red,
+                    child: const Center(
+                      child: Text(
+                        'Second Child',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  crossFadeState: _showFirstChild
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  firstCurve: Curves.easeInOut,
+                  secondCurve: Curves.easeInOut,
+                  sizeCurve: Curves.easeInOut,
+                  duration: const Duration(seconds: 1),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
