@@ -16,6 +16,8 @@ class _AnimationContainerState extends State<AnimationContainer> {
   double _opacity1 = 1.0; // Initial opacity of the first widget (visible)
   bool _showFirstChild =
       true; // Tracks which child to show in AnimatedCrossFade
+  // Track the current angle of rotation (in turns, where 1.0 = 360 degrees).
+  double _rotationAngle = 0.0;
 
   // Function to toggle size, color, and shape for the AnimatedContainer
   void _changeContainer() {
@@ -40,6 +42,13 @@ class _AnimationContainerState extends State<AnimationContainer> {
   void _toggleCrossFade() {
     setState(() {
       _showFirstChild = !_showFirstChild;
+    });
+  }
+
+  // This method will increase the rotation angle by 90 degrees (0.25 turns).
+  void _rotate() {
+    setState(() {
+      _rotationAngle += 0.25; // Rotate by 90 degrees (0.25 of a full turn)
     });
   }
 
@@ -124,6 +133,29 @@ class _AnimationContainerState extends State<AnimationContainer> {
                   sizeCurve: Curves.easeInOut,
                   duration: const Duration(seconds: 1),
                 ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+
+              // Animated Rotation
+              GestureDetector(
+                onTap: _rotate,
+                child: AnimatedRotation(
+                  turns: _rotationAngle,
+                  curve: Curves.easeInOut,
+                  duration: const Duration(seconds: 2),
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.blue,
+                    child: const Icon(Icons.rotate_right,
+                        color: Colors.white, size: 50),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 50,
               ),
             ],
           ),
