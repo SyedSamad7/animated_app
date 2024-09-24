@@ -45,8 +45,8 @@ class AnimatedPositioned1State extends State<AnimatedPositioned1> {
                 AnimatedPositioned(
                   duration: const Duration(seconds: 1),
                   curve: Curves.easeInOut,
-                  top: _isMoved ? 400 : 40,
-                  left: _isMoved ? 200 : 40,
+                  top: _isMoved ? 400 : 100,
+                  left: _isMoved ? 200 : 50,
                   child: Container(
                     width: 150,
                     height: 150,

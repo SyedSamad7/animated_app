@@ -1,7 +1,5 @@
-import 'package:animations_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'animations/basic_animations/animated_position.dart';
+import 'animations/basic_animations/animated_icon.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,15 +13,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          brightness: Brightness.dark, // Ensure brightness is consistent
+          brightness: Brightness.dark,
           primary: Colors.blue,
           secondary: Colors.pinkAccent,
         ),
       ),
-      home: const AnimatedPositioned1(),
+      home: const AnimatedIcon1(),
     );
   }
 }
