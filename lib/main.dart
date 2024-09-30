@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'animations/explicit_animations/curved_animation_widget.dart';
 import 'animations/explicit_animations/using_tween_animation.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.pinkAccent,
         ),
       ),
-      home: const UsingTweenAnimatioOpacityWidget(),
+      home: const CurvedAnimationWidget(),
     );
   }
 }

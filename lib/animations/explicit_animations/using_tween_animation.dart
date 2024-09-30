@@ -24,7 +24,7 @@ class UsingTweenAnimatioOpacityWidgetState
       vsync: this,
     );
 
-    _animation = Tween<double>(begin: 1.0, end: 0.0).animate(
+    _animation = Tween<double>(begin: 1.0, end: 0.4).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
