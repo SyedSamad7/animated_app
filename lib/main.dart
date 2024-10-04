@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.pinkAccent,
         ),
       ),
-      home: const TransforWidgetAnimation(),
+      home: const TransFormWidgetAnaimtion(),
     );
   }
 }
