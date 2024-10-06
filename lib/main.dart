@@ -1,3 +1,4 @@
+import 'package:animations_app/animations/explicit_animations/fade_transition_animation_widget.dart';
 import 'package:animations_app/animations/explicit_animations/transfor_widget_animation.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.pinkAccent,
         ),
       ),
-      home: const TransFormWidgetAnaimtion(),
+      home: const FadeTransitionAnimationWidget(),
     );
   }
 }
